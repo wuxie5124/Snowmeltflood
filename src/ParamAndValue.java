@@ -1,27 +1,27 @@
 import java.util.ArrayList;
 
 public class ParamAndValue {
-    public String name;
-    public ArrayList<String> value;
+    public String paramName;
+    public ArrayList<String> paramValue;
 
-    public ParamAndValue(String name, ArrayList<String> value) {
-        this.name = name;
-        this.value = value;
+    public ParamAndValue(String paramName, ArrayList<String> paramValue) {
+        this.paramName = paramName;
+        this.paramValue = paramValue;
     }
 
-    public String getName() {
-        return name;
+    public String getParamName() {
+        return paramName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setParamName(String paramName) {
+        this.paramName = paramName;
     }
 
-    public ArrayList<String> getValue() {
-        return value;
+    public ArrayList<String> getParamValue() {
+        return paramValue;
     }
 
-    public void setValue(ArrayList<String> value) {
-        this.value = value;
+    public void setParamValue(ArrayList<String> paramValue) {
+        this.paramValue = paramValue;
     }
 }

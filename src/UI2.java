@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DefaultFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,84 +9,95 @@ import java.util.ArrayList;
 import java.util.EventObject;
 
 public class UI2 extends UI0 {
-    private final ArrayList<Major.MLParam> mlParams;
+    //第二页
+//    public ArrayList<Major.MLParam> mlParams;
     private JTable jTable;
     private ArrayList<UI1.ParamData> paramList;
     private ParamTableModel paramTableModel;
 
-    public UI2(JFrame jFrame, JPanel jPanel, ArrayList<Major.MLParam> mlParams) {
-        super(jFrame, jPanel);
-        this.mlParams = mlParams;
-    }
-
 
     JPanel jPanel1;
+
     JPanel jPanel2;
     JButton jButton;
-
     JRadioButton jRadioButton1;
+
     JRadioButton jRadioButton2;
     JRadioButton jRadioButton3;
     JRadioButton jRadioButton4;
     JRadioButton jRadioButton5;
     JRadioButton jRadioButton6;
-
     ButtonGroup group;
-
-    JLabel[] jLabels;
-
-    JSpinner[] jSpinners;
-
-    SpinnerModel[] spinnerModels;
 
     ArrayList<ParamData> listParams;
 
     String ActiveMLWay;
 
+    ArrayList<ArrayList<ParamData>> tableData;
+
     @Override
     public void createUI(ArrayList<UI1.ParamData> paramList) {
         this.paramList = paramList;
+        intData();
         initComponent();
         initActionListener();
     }
 
+    private void intData() {
+        if (this.tableData.size() == 0) {
+            this.tableData = new ArrayList<>();
+            for (int i = 0; i < this.paramList.size(); i++) {
+                {
+                    String wayName = paramList.get(i).getWay();
+                    MLAndParam mlAndParam = paramHashMaps.get(wayName);
+                    ArrayList<ParamAndValue> param = mlAndParam.getParam();
+                    ArrayList<ParamData> Params = new ArrayList<>();
+                    for (ParamAndValue paramAndValue : param) {
+                        Params.add(new ParamData(paramAndValue.getParamName(), paramAndValue.getParamValue().get(0)));
+                    }
+                    this.tableData.add(Params);
+                }
+            }
+        }
+    }
+
     private Major.MLParam one;
+
     private Major.MLParam two;
     private Major.MLParam three;
     private Major.MLParam four;
     private Major.MLParam five;
     private Major.MLParam six;
 
+    public UI2(JFrame jFrame, JPanel jPanel, ArrayList<ArrayList<ParamData>> tableData) {
+        super(jFrame, jPanel);
+        this.tableData = tableData;
+    }
 
     private ActionListener RadioActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == jRadioButton1) {
                 UI2.this.ActiveMLWay = paramList.get(0).getWay();
-                addValue();
-                one = new Major.MLParam(paramList.get(0).getWay(), listParams);
+                listParams = tableData.get(0);
             } else if (e.getSource() == jRadioButton2) {
                 UI2.this.ActiveMLWay = paramList.get(1).getWay();
-                addValue();
-                two = new Major.MLParam(paramList.get(1).getWay(), listParams);
+                listParams = tableData.get(1);
             } else if (e.getSource() == jRadioButton3) {
                 UI2.this.ActiveMLWay = paramList.get(2).getWay();
-                addValue();
-                three = new Major.MLParam(paramList.get(2).getWay(), listParams);
+                listParams = tableData.get(2);
             } else if (e.getSource() == jRadioButton4) {
                 UI2.this.ActiveMLWay = paramList.get(3).getWay();
-                addValue();
-                four = new Major.MLParam(paramList.get(3).getWay(), listParams);
+                listParams = tableData.get(3);
             } else if (e.getSource() == jRadioButton5) {
                 UI2.this.ActiveMLWay = paramList.get(4).getWay();
-                addValue();
-                five = new Major.MLParam(paramList.get(4).getWay(), listParams);
+                listParams = tableData.get(4);
             } else if (e.getSource() == jRadioButton6) {
                 UI2.this.ActiveMLWay = paramList.get(5).getWay();
-                addValue();
-                six = new Major.MLParam(paramList.get(5).getWay(), listParams);
+                listParams = tableData.get(5);
             }
-            freshTable();
+            paramTableModel = new ParamTableModel(listParams);
+            jTable.setModel(paramTableModel);
             setEditorAndRender();
         }
     };
@@ -100,13 +112,14 @@ public class UI2 extends UI0 {
 
         this.jButton.addActionListener(e -> {
 
-            this.mlParams.removeAll(this.mlParams);
-            this.mlParams.add(one);
-            this.mlParams.add(two);
-            this.mlParams.add(three);
-            this.mlParams.add(four);
-            this.mlParams.add(five);
-            this.mlParams.add(six);
+            System.out.println("111");
+//            this.mlParams.removeAll(this.mlParams);
+//            this.mlParams.add(one);
+//            this.mlParams.add(two);
+//            this.mlParams.add(three);
+//            this.mlParams.add(four);
+//            this.mlParams.add(five);
+//            this.mlParams.add(six);
         });
     }
 
@@ -149,25 +162,23 @@ public class UI2 extends UI0 {
         for (int i = 0; i < paramList.size(); i++) {
             jPanel1.add(new JLabel(paramList.get(i).getWay()), new myGridBagConstraints(1, i, 1, 1, 1, 1).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.CENTER));
         }
-//        ActiveMLWay = paramList.get(0).getWay();
-//        this.listParams = new ArrayList<>();
-
+        this.ActiveMLWay = paramList.get(0).getWay();
         this.jTable = new JTable();
         JScrollPane jScrollPane = new JScrollPane();
         jScrollPane.setViewportView(jTable);
-//        addValue();
-        freshTable();
+        this.listParams = tableData.get(0);
+        this.paramTableModel = new ParamTableModel(this.listParams);
+        this.jTable.setModel(paramTableModel);
         setEditorAndRender();
 
         this.jPanel2.add(jScrollPane, new myGridBagConstraints(0, 0, 1, 1, 1, 1).setFill(GridBagConstraints.BOTH).setAnchor(GridBagConstraints.CENTER));
         this.jFrame.add(jPanel);
     }
 
-    private void freshTable() {
-        this.paramTableModel = new ParamTableModel(this.listParams);
-//        this.paramTableModel.setParamDatas(this.listParams);
-        this.jTable.setModel(paramTableModel);
-    }
+//    private void freshTable() {
+//        this.paramTableModel = new ParamTableModel(this.listParams);
+//        this.jTable.setModel(paramTableModel);
+//    }
 
     private void setEditorAndRender() {
         this.jTable.getColumnModel().getColumn(1).setCellRenderer(new DefaultTableCellRenderer() {
@@ -178,7 +189,7 @@ public class UI2 extends UI0 {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 String paramName = listParams.get(row).getParamName();
                 ParamAndValue param = paramHashMaps.get(ActiveMLWay).getParamByName(paramName);
-                spinnerModel = new SpinnerListModel(param.getValue());
+                spinnerModel = new SpinnerListModel(param.getParamValue());
                 jSpinner.setModel(spinnerModel);
                 jSpinner.setValue((String) value);
                 return jSpinner;
@@ -192,11 +203,12 @@ public class UI2 extends UI0 {
             public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
                 String paramName = listParams.get(row).getParamName();
                 ParamAndValue param = paramHashMaps.get(ActiveMLWay).getParamByName(paramName);
-                spinnerModel = new SpinnerListModel(param.getValue());
+                spinnerModel = new SpinnerListModel(param.getParamValue());
                 jSpinner.setModel(spinnerModel);
                 jSpinner.setValue((String) value);
                 return jSpinner;
             }
+
 
             @Override
             public boolean isCellEditable(EventObject anEvent) {
@@ -314,13 +326,7 @@ public class UI2 extends UI0 {
         this.listParams = new ArrayList<>();
 
         for (ParamAndValue paramAndValue : param) {
-            this.listParams.add(new ParamData(paramAndValue.getName(), paramAndValue.getValue().get(0)));
+            this.listParams.add(new ParamData(paramAndValue.getParamName(), paramAndValue.getParamValue().get(0)));
         }
     }
-
-    ActionListener actionListenerconfirm = e -> {
-        if (e.getSource() == jButton) {
-            System.out.println(1);
-        }
-    };
 }

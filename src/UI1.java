@@ -2,18 +2,14 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.EventObject;
 
 public class UI1 extends UI0 {
+    //方法构建 第一步
     public UI1(JFrame jFrame, JPanel jPanel) {
         super(jFrame, jPanel);
     }
-
-    JPanel jPanel1;
-    JPanel jPanel2;
-    JButton jButton;
 
 
     @Override
@@ -27,7 +23,6 @@ public class UI1 extends UI0 {
             paramList.add(new ParamData(1, paramHashMaps.get("XGBoost").getMLname(), false));
         }
         this.jPanel.setLayout(new GridBagLayout());
-//        this.jButton = new JButton("确定");
         JTable table = new JTable();
         JScrollPane jScrollPane = new JScrollPane();
         jScrollPane.setPreferredSize(new Dimension(300, 300));
@@ -90,7 +85,6 @@ public class UI1 extends UI0 {
         });
 
         jPanel.add(jScrollPane, new myGridBagConstraints(0, 0, 1, 3, 1, 1).setFill(GridBagConstraints.BOTH).setAnchor(GridBagConstraints.NORTHWEST).setInset(10, 20, 0, 20));
-//        jPanel.add(jButton, new myGridBagConstraints(0, 4, 0, 0, 0, 0).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.CENTER).setInset(10, 20, 0, 20));
         jFrame.add(jPanel);
     }
 
@@ -193,9 +187,4 @@ public class UI1 extends UI0 {
         }
     }
 
-    ActionListener actionListenerconfirm = e -> {
-        if (e.getSource() == jButton) {
-            System.out.println(1);
-        }
-    };
 }

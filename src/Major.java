@@ -1,10 +1,7 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 
 public class Major {
     public static int CLASSIFY = 0;
@@ -28,7 +25,7 @@ public class Major {
     JMenuItem item9 = new JMenuItem("回归");
     JMenuItem item10 = new JMenuItem("分类");
 
-    public ArrayList<MLParam> mlParams = new ArrayList<>();
+    public ArrayList<ArrayList<UI2.ParamData>> mlParams = new ArrayList<>();
 
     public Major() {
         JMenuBar menuBar = new JMenuBar();//创建菜单栏对象
@@ -69,6 +66,7 @@ public class Major {
             jPanel.removeAll();
             UI2 ui2 = new UI2(jFrame, jPanel, mlParams);
             ui2.createUI(paramList);
+            mlParams = ui2.tableData;
         } else if (((JMenuItem) e.getSource()) == item3) {
             jPanel.removeAll();
             UI3 ui3 = new UI3(jFrame, jPanel);
@@ -91,27 +89,27 @@ public class Major {
 
     public static class MLParam {
         public String getName() {
-            return name;
+            return machineLearngingName;
         }
 
         public void setName(String name) {
-            this.name = name;
+            this.machineLearngingName = name;
         }
 
-        public ArrayList<UI2.ParamData> getParamVal() {
-            return paramVal;
+        public ArrayList<UI2.ParamData> getMLparamAndValue() {
+            return MLparamAndValue;
         }
 
-        public void setParamVal(ArrayList<UI2.ParamData> paramVal) {
-            this.paramVal = paramVal;
+        public void setMLparamAndValue(ArrayList<UI2.ParamData> MLparamAndValue) {
+            this.MLparamAndValue = MLparamAndValue;
         }
 
-        String name;
-        ArrayList<UI2.ParamData> paramVal;
+        String machineLearngingName;
+        ArrayList<UI2.ParamData> MLparamAndValue;
 
-        public MLParam(String name, ArrayList<UI2.ParamData> paramVal) {
-            this.name = name;
-            this.paramVal = paramVal;
+        public MLParam(String name, ArrayList<UI2.ParamData> MLparamAndValue) {
+            this.machineLearngingName = name;
+            this.MLparamAndValue = MLparamAndValue;
         }
     }
 

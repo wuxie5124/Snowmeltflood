@@ -89,7 +89,6 @@ public class UI {
         jPanel1.add(jRadioButton3, new myGridBagConstraints(0, 3, 1, 1, 1, 1).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.CENTER));
         jPanel1.add(jRadioButton4, new myGridBagConstraints(0, 4, 1, 1, 1, 1).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.CENTER));
         jPanel1.add(jRadioButton5, new myGridBagConstraints(0, 5, 1, 1, 1, 1).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.CENTER));
-//        jPanel2.add(new JRadioButton("参数"), new myGridBagConstraints(0, 0, 1, 1, 1, 1).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.CENTER));
         int number = 6;
         JLabel[] jLabels = new JLabel[number];
         JSpinner[] jSpinners = new JSpinner[number];
@@ -281,10 +280,6 @@ public class UI {
 
         UI ui = new UI();
         ui.UIcreate(jFrame, jPanel, jPanel1, jPanel2, jButton, jLabel1, jLabel2, jLabels1, jComboBoxes, jLabel3, jComboBox2);
-//        ui.UIcreate1(jFrame);
-//        ui.UIcreate2(jFrame);
-//        ui.UIcreate3(jFrame);
-
         jFrame.setVisible(true);    //显示窗口
     }
 }
