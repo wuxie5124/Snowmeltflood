@@ -36,7 +36,7 @@ public class MLAndParam {
 
     public ParamAndValue getParamByName(String paramName) {
         for (ParamAndValue paramAndValue : Param) {
-            if (paramAndValue.getName() == paramName) {
+            if (paramAndValue.getParamName() == paramName) {
                 return paramAndValue;
             }
         }

@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.EventObject;
 
 public class UI3 extends UI0 {
+    //第三页
     public UI3(JFrame jFrame, JPanel jPanel) {
         super(jFrame, jPanel);
     }
-
     JPanel jPanelsub;
 
     JButton jButtonread;

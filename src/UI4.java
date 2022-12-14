@@ -4,9 +4,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class UI4 extends UI0 {
-    public ArrayList<Major.MLParam> mlParams;
+    //第四页
+    public ArrayList<ArrayList<UI2.ParamData>> mlParams;
 
-    public UI4(JFrame jFrame, JPanel jPanel, ArrayList<Major.MLParam> mlParams) {
+    public UI4(JFrame jFrame, JPanel jPanel, ArrayList<ArrayList<UI2.ParamData>> mlParams) {
         super(jFrame, jPanel);
         this.mlParams = mlParams;
     }
@@ -37,8 +38,10 @@ public class UI4 extends UI0 {
 
     ActionListener actionListener = e -> {
         if (e.getSource() == jButton1) {
-            for (Major.MLParam mlParam : this.mlParams) {
-                System.out.println(mlParam.getParamVal().get(0).ParamName + ":" + mlParam.getParamVal().get(0).ParamValue);
+            for (ArrayList<UI2.ParamData> mlParam : this.mlParams) {
+                for (UI2.ParamData paramData :mlParam) {
+                    System.out.println(paramData.ParamName + ":" + paramData.ParamValue);
+                }
             }
 
         } else if (e.getSource() == jButton2) {
