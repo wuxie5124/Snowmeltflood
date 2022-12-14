@@ -278,7 +278,6 @@ public class UI {
         jComboBox2.addItem("GBDT");
         jComboBox2.addItem("XGBoost");
         jComboBox2.addItem("LM");
-//        for (int i = 0 ,i <)
 
         UI ui = new UI();
         ui.UIcreate(jFrame, jPanel, jPanel1, jPanel2, jButton, jLabel1, jLabel2, jLabels1, jComboBoxes, jLabel3, jComboBox2);

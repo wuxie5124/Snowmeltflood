@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.EventObject;
 
-public class UI1 extends UI00 {
+public class UI1 extends UI0 {
     public UI1(JFrame jFrame, JPanel jPanel) {
         super(jFrame, jPanel);
     }

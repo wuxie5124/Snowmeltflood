@@ -1,89 +1,113 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
-public class UI0 extends UI00 {
-    JMenuItem item0 = new JMenu("预测类型");
+public abstract class UI0 {
+    JFrame jFrame;
+    JPanel jPanel;
+    private int TYPE;
+    public HashMap<String, MLAndParam> paramHashMaps;
 
-    JMenuItem item50 = new JMenu("预测类型");
-    JMenuItem item1 = new JMenuItem("方法构建");
-    JMenuItem item2 = new JMenuItem("模型参数设置");
-    JMenuItem item3 = new JMenuItem("特征设置");
-    JMenuItem item4 = new JMenuItem("方法执行");
-    JMenuItem item9 = new JMenuItem("回归");
-    JMenuItem item10 = new JMenuItem("分类");
 
-    public UI0(JFrame jFrame,JPanel jPanel) {
-        super(jFrame,jPanel);
+    public UI0(JFrame jFrame, JPanel jPanel) {
+        this.jFrame = jFrame;
+        this.jPanel = jPanel;
+//        this.paramList = new ArrayList<>();
+        initMLParamValue();
+    }
+    public int getTYPE() {
+        return TYPE;
+    }
+    public void setTYPE(int TYPE) {
+        this.TYPE = TYPE;
     }
 
-    @Override
-    public void createUI(ArrayList<UI1.ParamData> paramList) {
 
+    private void initMLParamValue() {
+        MLAndParam XGBoost = new MLAndParam("XGBoost");
+        MLAndParam GBDT = new MLAndParam("GBDT");
+        MLAndParam RandomForest = new MLAndParam("RandomForest");
+        MLAndParam KNN = new MLAndParam("KNeighbors");
+        MLAndParam SVM = new MLAndParam("SupportVector");
+        String[] RandomForestParam = new String[]{"n_estimators", "min_samples_split", "min_samples_leaf", "max_depth", "max_features", "random_state"};
+        String[] GBDTParam = new String[]{"n_estimators", "min_samples_split", "min_samples_leaf", "max_features", "subsample", "learning_rate", "random_state"};
+        String[] KNNParam = new String[]{"n_neighbors", "weights"};
+        String[] XGBoostParam = new String[]{"learning_rate", "n_estimators", "max_depth", "min_child_weight", "subsample", "colsample_bytree", "reg_alpha", "reg_lambda"};
+        String[] SVMParam = new String[]{"C", "kernel"};
+
+        String[] n_estimators = new String[]{"Default", "50", "100", "200", "500", "1000"};
+        String[] min_samples_split = new String[]{"Default", "2", "5", "10", "20", "50", "100"};
+        String[] min_samples_leaf = new String[]{"Default", "1", "5", "10", "20", "50", "100"};
+        String[] max_depth = new String[]{"Default", "10", "20", "30", "50", "70", "80", "100"};
+        String[] max_features = new String[]{"Default", "sqrt", "log2", "1", "3", "5", "7", "9", "11"};
+        String[] random_state = new String[]{"Default", "1", "3", "5"};
+        String[] subsample = new String[]{"Default", "0.1", "0.2", "0.4", "0.5", "0.7", "0.8"};
+        String[] learning_rate = new String[]{"Default", "0.1", "0.2", "0.3", "0.5", "0.7", "0.9", "1"};
+        String[] n_neighbors = new String[]{"Default", "1", "3", "5", "7", "10"};
+        String[] weights = new String[]{"uniform", "distance"};
+        String[] min_child_weight = new String[]{"Default", "1", "2", "3", "4", "5", "6"};
+        String[] colsample_bytree = new String[]{"Default", "0.2", "0.4", "0.6", "0.7", "0.8", "0.9", "1"};
+        String[] reg_alpha = new String[]{"Default", "0.1", "0.2", "0.3", "0.4"};
+        String[] reg_lambda = new String[]{"Default", "1", "2", "4", "5", "7", "9"};
+        String[] C = new String[]{"Default", "0.1", "0.5", "10"};
+        String[] kernel = new String[]{"rbf", "linear", "poly", "sigmoid", "precomputed"};
+
+        ParamAndValue paramAndValue_n_estimators = new ParamAndValue("n_estimators", new ArrayList<>(Arrays.asList(n_estimators)));
+        ParamAndValue paramAndValue_min_samples_split = new ParamAndValue("min_samples_split", new ArrayList<>(Arrays.asList(min_samples_split)));
+        ParamAndValue paramAndValue_min_samples_leaf = new ParamAndValue("min_samples_leaf", new ArrayList<>(Arrays.asList(min_samples_leaf)));
+        ParamAndValue paramAndValue_max_depth = new ParamAndValue("max_depth", new ArrayList<>(Arrays.asList(max_depth)));
+        ParamAndValue paramAndValue_max_features = new ParamAndValue("max_features", new ArrayList<>(Arrays.asList(max_features)));
+        ParamAndValue paramAndValue_random_state = new ParamAndValue("random_state", new ArrayList<>(Arrays.asList(random_state)));
+        ParamAndValue paramAndValue_subsample = new ParamAndValue("subsample", new ArrayList<>(Arrays.asList(subsample)));
+        ParamAndValue paramAndValue_learning_rate = new ParamAndValue("learning_rate", new ArrayList<>(Arrays.asList(learning_rate)));
+        ParamAndValue paramAndValue_n_neighbors = new ParamAndValue("n_neighbors", new ArrayList<>(Arrays.asList(n_neighbors)));
+        ParamAndValue paramAndValue_weights = new ParamAndValue("weights", new ArrayList<>(Arrays.asList(weights)));
+        ParamAndValue paramAndValue_min_child_weight = new ParamAndValue("min_child_weight", new ArrayList<>(Arrays.asList(min_child_weight)));
+        ParamAndValue paramAndValue_colsample_bytree = new ParamAndValue("colsample_bytree", new ArrayList<>(Arrays.asList(colsample_bytree)));
+        ParamAndValue paramAndValue_reg_alpha = new ParamAndValue("reg_alpha", new ArrayList<>(Arrays.asList(reg_alpha)));
+        ParamAndValue paramAndValue_reg_lambda = new ParamAndValue("reg_lambda", new ArrayList<>(Arrays.asList(reg_lambda)));
+        ParamAndValue paramAndValue_C = new ParamAndValue("C", new ArrayList<>(Arrays.asList(C)));
+        ParamAndValue paramAndValue_kernel = new ParamAndValue("kernel", new ArrayList<>(Arrays.asList(kernel)));
+
+
+        RandomForest.addParam(paramAndValue_n_estimators);
+        RandomForest.addParam(paramAndValue_min_samples_split);
+        RandomForest.addParam(paramAndValue_min_samples_leaf);
+        RandomForest.addParam(paramAndValue_max_depth);
+        RandomForest.addParam(paramAndValue_max_features);
+        RandomForest.addParam(paramAndValue_random_state);
+
+
+        GBDT.addParam(paramAndValue_n_estimators);
+        GBDT.addParam(paramAndValue_min_samples_split);
+        GBDT.addParam(paramAndValue_min_samples_leaf);
+        GBDT.addParam(paramAndValue_max_features);
+        GBDT.addParam(paramAndValue_subsample);
+        GBDT.addParam(paramAndValue_learning_rate);
+        GBDT.addParam(paramAndValue_random_state);
+
+        KNN.addParam(paramAndValue_n_neighbors);
+        KNN.addParam(paramAndValue_weights);
+
+        XGBoost.addParam(paramAndValue_learning_rate);
+        XGBoost.addParam(paramAndValue_n_estimators);
+        XGBoost.addParam(paramAndValue_max_depth);
+        XGBoost.addParam(paramAndValue_min_child_weight);
+        XGBoost.addParam(paramAndValue_subsample);
+        XGBoost.addParam(paramAndValue_colsample_bytree);
+        XGBoost.addParam(paramAndValue_reg_alpha);
+        XGBoost.addParam(paramAndValue_reg_lambda);
+
+        SVM.addParam(paramAndValue_C);
+        SVM.addParam(paramAndValue_kernel);
+        this.paramHashMaps = new HashMap<>();
+        this.paramHashMaps.put("RandomForest", RandomForest);
+        this.paramHashMaps.put("GBDT", GBDT);
+        this.paramHashMaps.put("KNN", KNN);
+        this.paramHashMaps.put("XGBoost", XGBoost);
+        this.paramHashMaps.put("SVM", SVM);
     }
 
-    public void createUI() {
-        JMenuBar menuBar = new JMenuBar();//创建菜单栏对象
-        jFrame.setJMenuBar(menuBar);
-
-        JMenu menu1 = new JMenu("融雪洪灾点预测");// 创建菜单对象
-
-        menuBar.add(menu1);
-        item0.add(item9);
-        item0.add(item10);
-        menu1.add(item0);
-        menu1.addSeparator();//在菜单项中间添加分界线
-        menu1.add(item1);
-        menu1.add(item2);
-        menu1.add(item3);
-        menu1.add(item4);
-
-        item1.addActionListener(MenuItemAction);
-        item2.addActionListener(MenuItemAction);
-        item3.addActionListener(MenuItemAction);
-        item4.addActionListener(MenuItemAction);
-        item9.addActionListener(TypeSelectAction);
-        item10.addActionListener(TypeSelectAction);
-
-        item1.setAccelerator(KeyStroke.getKeyStroke('A'));
-        item2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK));//添加热键
-    }
-
-    ActionListener MenuItemAction = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (((JMenuItem) e.getSource()) == item1) {
-                jPanel.removeAll();
-                UI1 ui1 = new UI1(jFrame,jPanel);
-                ui1.createUI(null);
-            } else if (((JMenuItem) e.getSource()) == item2) {
-                jPanel.removeAll();
-//                UI2 ui2 = new UI2(jFrame,jPanel, mlParams);
-//                ui2.createUI(null);
-            } else if (((JMenuItem) e.getSource()) == item3) {
-                jPanel.removeAll();
-                UI3 ui3 = new UI3(jFrame,jPanel);
-                ui3.createUI(null);
-            } else if (((JMenuItem) e.getSource()) == item4) {
-                jPanel.removeAll();
-//                UI4 ui4 = new UI4(jFrame,jPanel);
-//                ui4.createUI(null);
-            }
-            jFrame.revalidate();
-            jFrame.repaint();
-        }
-    };
-    ActionListener TypeSelectAction = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (((JMenuItem) e.getSource()) == item9) {
-                UI0.super.setTYPE(Major.CLASSIFY) ;
-            } else if (((JMenuItem) e.getSource()) == item10) {
-                UI0.super.setTYPE(Major.REGRESSION) ;
-            }
-        }
-    };
-
+    public abstract void createUI(ArrayList<UI1.ParamData> paramList);
 }

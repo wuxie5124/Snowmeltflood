@@ -1,16 +1,12 @@
 import javax.swing.*;
-import javax.swing.event.CellEditorListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.EventObject;
 
-import static java.awt.Label.CENTER;
-
-public class UI3 extends UI00 {
+public class UI3 extends UI0 {
     public UI3(JFrame jFrame, JPanel jPanel) {
         super(jFrame, jPanel);
     }

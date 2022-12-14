@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class UI4 extends UI00 {
+public class UI4 extends UI0 {
     public ArrayList<Major.MLParam> mlParams;
 
     public UI4(JFrame jFrame, JPanel jPanel, ArrayList<Major.MLParam> mlParams) {

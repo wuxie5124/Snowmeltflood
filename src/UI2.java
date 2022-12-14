@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.EventObject;
 
-public class UI2 extends UI00 {
+public class UI2 extends UI0 {
     private final ArrayList<Major.MLParam> mlParams;
     private JTable jTable;
     private ArrayList<UI1.ParamData> paramList;
