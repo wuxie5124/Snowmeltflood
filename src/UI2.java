@@ -1,7 +1,6 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.DefaultFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +18,7 @@ public class UI2 extends UI0 {
     JPanel jPanel1;
 
     JPanel jPanel2;
-    JButton jButton;
+    JButton jButtonOK;
     JRadioButton jRadioButton1;
 
     JRadioButton jRadioButton2;
@@ -110,16 +109,8 @@ public class UI2 extends UI0 {
         this.jRadioButton5.addActionListener(RadioActionListener);
         this.jRadioButton6.addActionListener(RadioActionListener);
 
-        this.jButton.addActionListener(e -> {
-
+        this.jButtonOK.addActionListener(e -> {
             System.out.println("111");
-//            this.mlParams.removeAll(this.mlParams);
-//            this.mlParams.add(one);
-//            this.mlParams.add(two);
-//            this.mlParams.add(three);
-//            this.mlParams.add(four);
-//            this.mlParams.add(five);
-//            this.mlParams.add(six);
         });
     }
 
@@ -128,10 +119,10 @@ public class UI2 extends UI0 {
         this.jPanel2 = new JPanel();
         GridBagLayout gridBagLayout = new GridBagLayout();
 
-        this.jButton = new JButton("确定");
+        this.jButtonOK = new JButton("确定");
         this.jPanel.add(jPanel1, new myGridBagConstraints(0, 0, 1, 3, 1, 1).setFill(GridBagConstraints.BOTH).setAnchor(GridBagConstraints.NORTHWEST));
         this.jPanel.add(jPanel2, new myGridBagConstraints(1, 0, 1, 3, 1, 1).setFill(GridBagConstraints.BOTH).setAnchor(GridBagConstraints.NORTHWEST));
-        this.jPanel.add(jButton, new myGridBagConstraints(0, 3, 2, 1, 1, 1).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.CENTER));
+        this.jPanel.add(jButtonOK, new myGridBagConstraints(0, 3, 2, 1, 1, 1).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.CENTER));
         this.jPanel1.setLayout(gridBagLayout);
         this.jPanel2.setLayout(gridBagLayout);
         this.jPanel1.setPreferredSize(new Dimension(200, 350));

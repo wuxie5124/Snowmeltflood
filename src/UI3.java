@@ -11,20 +11,21 @@ public class UI3 extends UI0 {
     public UI3(JFrame jFrame, JPanel jPanel) {
         super(jFrame, jPanel);
     }
-    JPanel jPanelsub;
+    JPanel jPanelSub;
 
-    JButton jButtonread;
-    JButton jButtonok;
+    JButton jButtonRead;
+    JButton jButtonOK;
 
     @Override
     public void createUI(ArrayList<UI1.ParamData> paramList) {
-        jButtonread = new JButton("读取");
-        jButtonok = new JButton("确定");
-        jPanelsub = new JPanel();
+        jButtonRead = new JButton("读取");
+        jButtonOK = new JButton("确定");
+        jPanelSub = new JPanel();
+
         JTable paramTable = new JTable();
         GridBagLayout gridBagLayout = new GridBagLayout();
         jPanel.setLayout(gridBagLayout);
-        jPanelsub.setLayout(gridBagLayout);
+        jPanelSub.setLayout(gridBagLayout);
 
         String[] param = new String[]{"XJAVHRR_av", "Vegetation", "Variance_c", "Slope", "SD", "Road_densi", "Relative_E", "Particle_s", "Elevation", "Distance_f", "Curve_numb", "Agricultur"};
         ArrayList<ParamData> paramData = new ArrayList<>();
@@ -79,10 +80,17 @@ public class UI3 extends UI0 {
         paramTable.getColumnModel().getColumn(0).setCellRenderer(defaultTableCellRenderer1);
 
         jPanel.add(jScrollPane, new myGridBagConstraints(0, 0, 1, 1, 1, 1).setFill(GridBagConstraints.BOTH).setAnchor(GridBagConstraints.CENTER).setInset(10,20,0,20));
-        jPanel.add(jPanelsub, new myGridBagConstraints(0, 4, 1, 1, 1, 1).setFill(GridBagConstraints.BOTH).setAnchor(GridBagConstraints.CENTER).setInset(10,20,20,20));
-        jPanelsub.add(jButtonread, new myGridBagConstraints(0, 0, 1, 1, 1, 1).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.CENTER));
-        jPanelsub.add(jButtonok, new myGridBagConstraints(1, 0, 1, 1, 1, 1).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.CENTER));
+        jPanel.add(jPanelSub, new myGridBagConstraints(0, 4, 1, 1, 1, 1).setFill(GridBagConstraints.BOTH).setAnchor(GridBagConstraints.CENTER).setInset(10,20,20,20));
+        jPanelSub.add(jButtonRead, new myGridBagConstraints(0, 0, 1, 1, 1, 1).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.CENTER));
+        jPanelSub.add(jButtonOK, new myGridBagConstraints(1, 0, 1, 1, 1, 1).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.CENTER));
         jFrame.add(jPanel);
+
+        initActionListener();
+    }
+
+    private void initActionListener() {
+        jButtonRead.addActionListener(actionListenerPage3);
+        jButtonOK.addActionListener(actionListenerPage3);
     }
 
     private class ParamData {
@@ -176,10 +184,12 @@ public class UI3 extends UI0 {
         }
     }
 
-    ActionListener actionListener3 = e -> {
-        if (e.getSource() == jButtonread) {
+    ActionListener actionListenerPage3 = e -> {
+        if (e.getSource() == jButtonRead) {
 
-        } else if (e.getSource() == jButtonok) {
+
+        } else if (e.getSource() == jButtonOK) {
+
 
         }
     };
