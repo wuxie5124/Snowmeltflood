@@ -1,3 +1,6 @@
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Workbook;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -7,9 +10,12 @@ import java.util.ArrayList;
 import java.util.EventObject;
 
 public class UI3 extends UI0 {
+    private ParamTableModel paramTableModel ;
+
     //第三页
     public UI3(JFrame jFrame, JPanel jPanel) {
         super(jFrame, jPanel);
+        paramTableModel = new ParamTableModel();
     }
     JPanel jPanelSub;
 
@@ -32,7 +38,7 @@ public class UI3 extends UI0 {
         for (int i = 0; i < param.length; i++) {
             paramData.add(new ParamData(ParamTableModel.CHOOSE, param[i]));
         }
-        ParamTableModel paramTableModel = new ParamTableModel(paramData);
+        this.paramTableModel.setModelData(paramData);
         paramTable.setModel(paramTableModel);
         paramTable.getColumnModel().getColumn(0).setPreferredWidth(50);
         paramTable.getColumnModel().getColumn(1).setPreferredWidth(200);
@@ -134,6 +140,14 @@ public class UI3 extends UI0 {
             this.paramDatas = paramDatas;
         }
 
+        public ParamTableModel(){
+
+        }
+
+        public void setModelData(ArrayList<ParamData> paramDatas){
+            this.paramDatas = paramDatas;
+        }
+
         @Override
         public boolean isCellEditable(int row, int column) {
             return column == 2;
@@ -182,15 +196,20 @@ public class UI3 extends UI0 {
                     return super.getValueAt(rowIndex, columnIndex);
             }
         }
+        public ArrayList<String> getCheckedParams(){
+            ArrayList<String> Params = new ArrayList<>();
+            for (int i = 0; i < paramDatas.size(); i++) {
+                if(paramDatas.get(i).getCheck()) Params.add(paramDatas.get(i).getParamName());
+            }
+            return Params;
+        }
     }
 
+    private ArrayList<String> checkedParams;
     ActionListener actionListenerPage3 = e -> {
         if (e.getSource() == jButtonRead) {
+//            Workbook wb=new HSSFWorkbook();
 
-
-        } else if (e.getSource() == jButtonOK) {
-
-
-        }
+        } else if (e.getSource() == jButtonOK) this.checkedParams = this.paramTableModel.getCheckedParams();
     };
 }
