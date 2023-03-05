@@ -208,8 +208,6 @@ public class UI3 extends UI0 {
     private ArrayList<String> checkedParams;
     ActionListener actionListenerPage3 = e -> {
         if (e.getSource() == jButtonRead) {
-//            Workbook wb=new HSSFWorkbook();
-
         } else if (e.getSource() == jButtonOK) this.checkedParams = this.paramTableModel.getCheckedParams();
     };
 }

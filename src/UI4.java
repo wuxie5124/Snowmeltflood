@@ -9,7 +9,7 @@ public class UI4 extends UI0 {
 
     public UI4(JFrame jFrame, JPanel jPanel, ArrayList<ArrayList<UI2.ParamData>> mlParams) {
         super(jFrame, jPanel);
-        this.mlParams = mlParams;
+            this.mlParams = mlParams;
     }
 
     JButton jButton1;

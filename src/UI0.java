@@ -16,9 +16,11 @@ public abstract class UI0 {
 //        this.paramList = new ArrayList<>();
         initMLParamValue();
     }
+
     public int getTYPE() {
         return TYPE;
     }
+
     public void setTYPE(int TYPE) {
         this.TYPE = TYPE;
     }
